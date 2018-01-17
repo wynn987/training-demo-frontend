@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./SignIn.css";
+import { API_URL_PREFIX } from '../../utilities/helper';
 
 export default class Login extends Component {
   constructor(props) {
@@ -22,9 +23,32 @@ export default class Login extends Component {
     });
   }
 
+  _fetchAuthenticateUser(email, password) {
+    let url = API_URL_PREFIX + '/auth/sign_in';
+    fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    })
+    .then((results) => {
+      if (results.status === 200){
+        
+      }
+    })
+  }
+
   handleSubmit = event => {
     event.preventDefault();
+    this._fetchAuthenticateUser(this.state.email, this.state.password);
+
   }
+
 
   render() {
     return (
