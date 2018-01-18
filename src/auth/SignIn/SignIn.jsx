@@ -2,20 +2,33 @@ import React, {Component} from "react";
 import {Control, Form} from 'react-redux-form';
 import "./SignIn.css";
 import {connect} from 'react-redux';
-import {authUser} from './SignInActions';
+import { signInUser } from '../../redux-token-auth-config'
 
 class Login extends Component {
 
   handleSubmit(user) {
-    this
-      .props
-      .authUser(user);
+    console.log('handle submit');
+    console.log(signInUser);
+    console.log(user);
+    signInUser({
+      email: user.email,
+      password: user.password
+    })
+    .then(
+      
+    )
+    .catch(error => {
+      console.log(error);
+    })
+      
+
   }
 
   render() {
     return (
-      <div class='login-page'>
-        <Form class='form' model="user" onSubmit={(user) => this.handleSubmit(user)}>
+      <div className='login-page'>
+        <Form className='form' model="user" onSubmit={(user) => this.handleSubmit(user)}>
+
         <h3>Grant Application</h3>
           <hr />
           <Control type='email' placeholder='Email' model="user.email" id="user.email"/>
@@ -29,14 +42,4 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {user: state.user, hasErrored: state.userHasErrored, authenticating: state.authenticating};
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    authUser: (user) => dispatch(authUser(user))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, {signInUser})(Login);
