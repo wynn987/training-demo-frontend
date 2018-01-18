@@ -1,86 +1,48 @@
-import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import React, {Component} from "react";
+import { Control, Form, actions } from 'react-redux-form';
 import "./SignIn.css";
-import { API_URL_PREFIX } from '../../utilities/helper';
+import {API_URL_PREFIX} from '../../utilities/helper';
+import {connect} from 'react-redux';
+import {authUser} from './SignInActions';
 
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
+class Login extends Component {
 
-    this.state = {
-      email: "",
-      password: ""
-    };
+  handleSubmit(user) {
+    this.props.authUser(user);
   }
-
-  validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
-  }
-
-  handleChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
-  }
-
-  _fetchAuthenticateUser(email, password) {
-    let url = API_URL_PREFIX + '/auth/sign_in';
-    fetch(url, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
-    })
-    .then((results) => {
-      if (results.status === 200){
-        
-      }
-    })
-  }
-
-  handleSubmit = event => {
-    event.preventDefault();
-    this._fetchAuthenticateUser(this.state.email, this.state.password);
-
-  }
-
 
   render() {
     return (
-      <div className="Login">
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
-            <FormControl
-              autoFocus
-              type="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Password</ControlLabel>
-            <FormControl
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-            />
-          </FormGroup>
-          <Button
-            block
-            bsSize="large"
-            disabled={!this.validateForm()}
-            type="submit"
-          >
-            Login
-          </Button>
-        </form>
-      </div>
+      <Form
+      model="user"
+      onSubmit={(user) => this.handleSubmit(user)}
+    >
+      <label htmlFor="user.email">Email:</label>
+      <Control type='email' model="user.email" id="user.email" />
+
+      <label htmlFor="user.password">Password:</label>
+      <Control type='password' model="user.password" id="user.password" />
+
+      <button type="submit">
+        Login
+      </button>
+    </Form>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user, 
+    hasErrored: state.userHasErrored, 
+    authenticating: state.authenticating
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    authUser: (user) => dispatch(authUser(user))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
