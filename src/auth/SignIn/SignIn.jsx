@@ -16,23 +16,13 @@ class Login extends Component {
     return (
       <div class='login-page'>
         <Form class='form' model="user" onSubmit={(user) => this.handleSubmit(user)}>
-          <div class='row'>
-            <label htmlFor="user.email">Email:</label>
-            <Control type='email' model="user.email" id="user.email"/>
-          </div>
-          <div class='row'>
-            <label htmlFor="user.password">Password:</label>
-            <Control
-              type='password'
-              model="user.password"
-              id="user.password"/>
-          </div>
-          <div class='row'>
-          <br/>
-            <button type="submit">
-              Login
-            </button>
-          </div>
+        <h3>Grant Application</h3>
+          <hr />
+          <Control type='email' placeholder='Email' model="user.email" id="user.email"/>
+          <Control type='password' placeholder='Password' model="user.password" id="user.password"/>
+          <button type="submit">
+            Login
+          </button>
         </Form>
       </div>
     );
