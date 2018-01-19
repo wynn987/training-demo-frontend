@@ -5,25 +5,8 @@ import {
   Button
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { API_URL_PREFIX } from '../utilities/helper';
 
 class GrantApplicationsIndex extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      grant_applications: [],
-    };
-  }
-
-  _fetchGrantApplicationsData() {
-    let url = API_URL_PREFIX + '/grant_applications';
-    fetch(url)
-    .then((results) => {
-      return results.json();
-    }).then((data) => {
-      this.setState({ grant_applications: data });
-    });
-  }
 
   componentWillMount() {
     this._fetchGrantApplicationsData();
