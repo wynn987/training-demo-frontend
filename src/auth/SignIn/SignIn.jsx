@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Control, Form} from 'react-redux-form';
+import { Redirect } from 'react-router'
 import "./SignIn.css";
 import {connect} from 'react-redux';
 import { signInUser } from '../../redux-token-auth-config'
@@ -7,21 +8,22 @@ import { signInUser } from '../../redux-token-auth-config'
 class Login extends Component {
 
   handleSubmit(user) {
-    console.log('handle submit');
-    console.log(signInUser);
-    console.log(user);
-    signInUser({
-      email: user.email,
-      password: user.password
-    })
-    .then(
-      
-    )
-    .catch(error => {
+    const { signInUser } = this.props
+    const  {
+      email,
+      password,
+    } = user
+    signInUser({ email, password })
+    .then(handleLogin())
+    .catch((error) => {
       console.log(error);
-    })
-      
+  })
+  }
 
+  handleLogin(){
+    if (this.props.isSignedIn){
+      
+    }
   }
 
   render() {
@@ -42,4 +44,8 @@ class Login extends Component {
   }
 }
 
-export default connect(null, {signInUser})(Login);
+function mapStateToProps(state) {
+  return { isSignedIn: state.reduxTokenAuth.currentUser.isSignedIn};
+}
+
+export default connect(mapStateToProps, {signInUser})(Login);
