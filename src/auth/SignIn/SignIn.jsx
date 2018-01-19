@@ -14,19 +14,18 @@ class Login extends Component {
       password,
     } = user
     signInUser({ email, password })
-    .then(handleLogin())
     .catch((error) => {
+      if (!this.props.isSignedIn){
+        alert("Invalid password!")
+      }
       console.log(error);
   })
   }
 
-  handleLogin(){
-    if (this.props.isSignedIn){
-      
-    }
-  }
-
   render() {
+    if (this.props.isSignedIn) {
+      return <Redirect to='/grant_applications'/>;
+    }
     return (
       <div className='login-page'>
         <Form className='form' model="user" onSubmit={(user) => this.handleSubmit(user)}>
