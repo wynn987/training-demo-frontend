@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from "react-router-dom";
+import { createBrowserHistory } from 'history'
 import './index.css';
 import { Provider } from 'react-redux';
 import App from './App';
@@ -11,9 +13,13 @@ import { verifyCredentials } from './redux-token-auth-config'
 const store = configureStore(initialState);
 verifyCredentials(store)
 
+const history = createBrowserHistory({})
+
 ReactDOM.render((
   <Provider store={store}>
+    <BrowserRouter history={history}>
     <App />
+    </BrowserRouter>
   </Provider>
   ), document.getElementById('root')
 );
