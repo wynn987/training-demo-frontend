@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {
   Row,
-  Col,
-  Button
+  Col
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -14,9 +13,8 @@ class GrantApplicationsIndex extends Component {
 
   _renderGrantApplications() {
     return this.state.grant_applications.map((grant_application, i) => {
-      let name = grant_application.applicant_name.toLowerCase().replace(/ /g, "_");
       return (
-        <Link key={i} to={`/grant_applications/${grant_application.id}`}>
+        <Link key={i} to={`/grant_application/${grant_application.id}`}>
           <Row>
             <Col xs={12}>
               <p style={{ color: 'black' }}><b>Applicant Name: {grant_application.applicant_name} | Application Type: {grant_application.application_type}</b></p>
