@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { GrantApplicationIndex } from './GrantApplicationActions';
 import {
   Row,
   Col
@@ -6,26 +8,35 @@ import {
 import { Link } from 'react-router-dom';
 
 class GrantApplicationsIndex extends Component {
-
   componentWillMount() {
-    this._fetchGrantApplicationsData();
+    this.props.grantApplications();
   }
 
   _renderGrantApplications() {
-    return this.state.grant_applications.map((grant_application, i) => {
+    if (this.props.showError || this.props.grant_applications == null){
       return (
-        <Link key={i} to={`/grant_application/${grant_application.id}`}>
-          <Row>
-            <Col xs={12}>
-              <p style={{ color: 'black' }}><b>Applicant Name: {grant_application.applicant_name} | Application Type: {grant_application.application_type}</b></p>
-              <br/>
-              <br/>
-            </Col>
-          </Row>
-          <hr />
-        </Link>
-      );
-    });
+      <div className="Message">
+        <h3>Sorry, you are not authorised to access this page!</h3>
+        <p>Please log in as an appropriate user</p>
+      </div>
+      )
+    }
+    else{
+      return this.props.grant_applications.map((grant_application, i) => {
+        return (
+          <Link key={i} to={`/grant_application/${grant_application.id}`}>
+            <Row>
+              <Col xs={12}>
+                <p style={{ color: 'black' }}><b>Applicant Name: {grant_application.applicant_name} | Application Type: {grant_application.application_type}</b></p>
+                <br/>
+                <br/>
+              </Col>
+            </Row>
+            <hr />
+          </Link>
+        );
+      });
+    }
   }
 
   render() {
@@ -39,4 +50,17 @@ class GrantApplicationsIndex extends Component {
   }
 }
 
-export default GrantApplicationsIndex;
+const mapStateToProps = (state) => {
+  return {
+      grant_applications: state.grant_applications,
+      indexError: state.indexError
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    grantApplications: () => dispatch(GrantApplicationIndex())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GrantApplicationsIndex);
