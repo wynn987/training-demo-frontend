@@ -1,4 +1,5 @@
 import {API_URL_PREFIX, getAuthHeaders, storeAuthHeaders} from '../utilities/helper'
+import axios from 'axios'
 
 export function grantApplications(grant_applications) {
   return {type: 'GRANTS_INDEX_SUCCESS', grant_applications};
@@ -10,20 +11,20 @@ export function grantsIndexError(bool) {
 
 export function GrantApplicationIndex() {
   return (dispatch) => {
-    const headers = getAuthHeaders
-    fetch(API_URL_PREFIX + "/grant_applications", {
-      type: "cors",
-      method: "GET",
-      headers: headers
-    }).then((response) => {
-      //storeAuthHeaders(response.headers)
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      return response;
-    })
-    .then((response) => response.json())
-    .then((items) => dispatch(grantApplications(items)))
-    .catch(() => dispatch(grantsIndexError(true)));
-  };
+    var headers = getAuthHeaders
+    try {
+      axios({
+        method: 'GET',
+        url: API_URL_PREFIX + "/grant_applications",
+        data: headers,
+      })
+      .then(function(response){
+        storeAuthHeaders(response.headers)
+        dispatch(grantApplications(response.data))
+      })
+    } catch (error) {
+      dispatch(grantsIndexError(true))
+      throw error
+    }
+  }
 }

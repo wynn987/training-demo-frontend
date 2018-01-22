@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 let prefix = "http://localhost:3000";
 if (process.env.NODE_ENV === 'production') {
     prefix = "https://review-api.gds-gov.tech";
@@ -13,21 +15,25 @@ const authHeaderKeys = [
 ]
 export const storeAuthHeaders = (headers) => {
   authHeaderKeys.forEach((key) => {
-    console.log(headers.get(key))
-    window.localStorage.setItem(key, headers.get(key))
+    axios.defaults.headers.common[key] = headers[key]
+  })
+  authHeaderKeys.forEach((key) => {
+   window.localStorage.setItem(key, headers[key])
   })
 }
 
-export const getAuthHeaders = new Headers({
-  'access-token': window.localStorage
-    .getItem('access-token'),
-  client: window.localStorage
-    .getItem('client'),
-  uid: window.localStorage
-    .getItem('uid'),
-  expiry: window.localStorage
-    .getItem('expiry')
-});
+export var getAuthHeaders = () => {
+  return new Headers({
+    'access-token': window.localStorage
+      .getItem('access-token'),
+    client: window.localStorage
+      .getItem('client'),
+    uid: window.localStorage
+      .getItem('uid'),
+    expiry: window.localStorage
+      .getItem('expiry')
+  });
+}
 
 export function headersNotReady(){
   authHeaderKeys.forEach((key) => {
