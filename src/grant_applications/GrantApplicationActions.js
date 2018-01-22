@@ -16,7 +16,6 @@ export function GrantApplicationIndex() {
       method: "GET",
       headers: headers
     }).then((response) => {
-      console.log(response.headers.get("uid"))
       //storeAuthHeaders(response.headers)
       if (!response.ok) {
         throw Error(response.statusText);

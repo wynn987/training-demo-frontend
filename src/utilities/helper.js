@@ -7,7 +7,6 @@ export const API_URL_PREFIX = prefix;
 
 const authHeaderKeys = [
   'access-token',
-  'token-type',
   'client',
   'expiry',
   'uid',
@@ -21,15 +20,23 @@ export const storeAuthHeaders = (headers) => {
 
 export const getAuthHeaders = new Headers({
   'access-token': window.localStorage
-    .getItem('access-token')
-    .toString(),
+    .getItem('access-token'),
   client: window.localStorage
-    .getItem('client')
-    .toString(),
+    .getItem('client'),
   uid: window.localStorage
-    .getItem('uid')
-    .toString(),
+    .getItem('uid'),
   expiry: window.localStorage
     .getItem('expiry')
-    .toString()
 });
+
+export function headersNotReady(){
+  authHeaderKeys.forEach((key) => {
+    if (window.localStorage.getItem(key) == null || window.localStorage.getItem(key) === undefined){
+      return true
+    }
+  })
+  for (var pair of authHeaderKeys.entries()) {
+    console.log(pair[0]+ ': '+ pair[1]);
+ }
+  return false
+}

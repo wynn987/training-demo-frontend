@@ -4,6 +4,7 @@ import { Redirect } from 'react-router'
 import "./SignIn.css";
 import {connect} from 'react-redux';
 import { signInUser } from '../../redux-token-auth-config'
+import {headersNotReady} from '../../utilities/helper'
 
 class Login extends Component {
 
@@ -23,7 +24,8 @@ class Login extends Component {
   }
 
   render() {
-    if (this.props.isSignedIn && this.props.headersAreSet) {
+    if (this.props.isSignedIn) {
+      while(headersNotReady()){}
       return <Redirect to='/grant_applications'/>;
     }
     return (
@@ -44,8 +46,7 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  return { isSignedIn: state.reduxTokenAuth.currentUser.isSignedIn,
-           headersAreSet: state.headersAreSet};
+  return { isSignedIn: state.reduxTokenAuth.currentUser.isSignedIn};
 }
 
 export default connect(mapStateToProps, {signInUser})(Login);

@@ -6,12 +6,3 @@ export function user(state = {email: "", password: ""}, action) {
       return state;
   }
 }
-
-export function headersAreSet(state = false, action) {
-  switch (action.type) {
-    case 'HEADERS_ARE_SET':
-      return action.areSet;
-    default:
-      return state
-  }
-}

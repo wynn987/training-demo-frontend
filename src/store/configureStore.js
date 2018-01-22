@@ -9,10 +9,10 @@ export default function configureStore(initialState) {
     middlewares.push(thunk);
 
     if (process.env.NODE_ENV === `development`) {
-    // disable logger unless needed due to lag
+    //disable logger unless needed due to lag
 
-    // const { logger } = require(`redux-logger`);
-    // middlewares.push(logger);
+    const { logger } = require(`redux-logger`);
+    middlewares.push(logger);
     }
     return createStore(
         rootReducer,
