@@ -23,7 +23,7 @@ class Login extends Component {
   }
 
   render() {
-    if (this.props.isSignedIn) {
+    if (this.props.isSignedIn && this.props.headersAreSet) {
       return <Redirect to='/grant_applications'/>;
     }
     return (
@@ -44,7 +44,8 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  return { isSignedIn: state.reduxTokenAuth.currentUser.isSignedIn};
+  return { isSignedIn: state.reduxTokenAuth.currentUser.isSignedIn,
+           headersAreSet: state.headersAreSet};
 }
 
 export default connect(mapStateToProps, {signInUser})(Login);
