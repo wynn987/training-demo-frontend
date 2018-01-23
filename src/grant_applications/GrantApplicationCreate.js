@@ -3,13 +3,17 @@ import {Col, Row, Button} from 'react-bootstrap';
 import {Control, Form} from 'react-redux-form';
 import "./GrantApplicationCreate.css";
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {push} from 'react-router'
 
 class GrantApplicationCreate extends Component {
   handleSubmit(grant_application) {
     this
       .props
       .createGrantApplication(grant_application)
+  }
+
+  handleCancel(){
+    this.props.history.push('/grant_applications')
   }
 
   render() {
@@ -47,7 +51,7 @@ class GrantApplicationCreate extends Component {
           <br/>
           <Row className='pull-right'>
             <Col xs={6}>
-              <Button type="button">Cancel</Button>
+              <Button type="button" onClick={() => this.handleCancel()}>Cancel</Button>
             </Col>
             <Col xs={6}>
               <Button bsStyle="primary" type="submit">Create</Button>
