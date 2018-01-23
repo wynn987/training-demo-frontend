@@ -10,15 +10,15 @@ export function grantsIndexError(bool) {
 }
 
 export function GrantApplicationIndex() {
+  console.log("before send: "+ JSON.stringify(getAuthHeaders()))
   return (dispatch) => {
-    var headers = getAuthHeaders
     try {
-      axios({
+      return axios({
         method: 'GET',
         url: API_URL_PREFIX + "/grant_applications",
-        data: headers,
       })
       .then(function(response){
+        console.log("grant application headers: " + JSON.stringify(response.headers))
         storeAuthHeaders(response.headers)
         dispatch(grantApplications(response.data))
       })

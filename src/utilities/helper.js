@@ -23,16 +23,14 @@ export const storeAuthHeaders = (headers) => {
 }
 
 export var getAuthHeaders = () => {
-  return new Headers({
+  return {
     'access-token': window.localStorage
       .getItem('access-token'),
     client: window.localStorage
       .getItem('client'),
     uid: window.localStorage
-      .getItem('uid'),
-    expiry: window.localStorage
-      .getItem('expiry')
-  });
+      .getItem('uid')
+  };
 }
 
 export function headersNotReady(){
@@ -42,7 +40,7 @@ export function headersNotReady(){
     }
   })
   for (var pair of authHeaderKeys.entries()) {
-    console.log(pair[0]+ ': '+ pair[1]);
+    console.log(pair[1]+ ': '+ pair[2]);
  }
   return false
 }

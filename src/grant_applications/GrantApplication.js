@@ -18,12 +18,7 @@ class GrantApplication extends Component {
   _fetchGrantApplicationData(id) {
     // Fetch grant_application data
     let url = API_URL_PREFIX + `/grant_applications/${id}`;
-    fetch(url)
-    .then((results) => {
-      return results.json();
-    }).then((data) => {
-      this.setState({grant_application: data});
-    });
+    
   }
 
   componentWillMount() {
@@ -35,6 +30,7 @@ class GrantApplication extends Component {
     return (
       <div>
         <div className='main-content'>
+        show
         </div>
       </div>
     );

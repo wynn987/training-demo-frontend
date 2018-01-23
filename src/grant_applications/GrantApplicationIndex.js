@@ -24,7 +24,7 @@ class GrantApplicationsIndex extends Component {
     else{
       return this.props.grant_applications.map((grant_application, i) => {
         return (
-          <Link key={i} to={`/grant_application/${grant_application.id}`}>
+          <Link key={i} to={`/grant_applications/${grant_application.id}`}>
             <Row>
               <Col xs={12}>
                 <p style={{ color: 'black' }}><b>Applicant Name: {grant_application.applicant_name} | Application Type: {grant_application.application_type}</b></p>
