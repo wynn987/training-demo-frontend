@@ -21,7 +21,7 @@ class GrantApplicationsIndex extends Component {
     return(
       <div class='grant_new'>
             <Link to={`/grant_applications/create`}>
-              <h2>New</h2>
+              <h2>NEW</h2>
             </Link>
           </div>
     )
@@ -44,7 +44,7 @@ class GrantApplicationsIndex extends Component {
             <Link key={i} to={`/grant_applications/${grant_application.id}`} onClick={() => this.handleShowRequest(grant_application.id)}>
               <Row>
                 <Col xs={12}>
-                  <p style={{ color: 'black' }}><b>Applicant Name: {grant_application.applicant_name} | Application Type: {grant_application.application_type}</b></p>
+                  <p style={{ color: 'black' }}>Applicant Name: {grant_application.applicant_name} | Application Type: {grant_application.application_type}</p>
                   <br/>
                   <br/>
                 </Col>

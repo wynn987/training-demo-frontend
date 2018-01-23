@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Col, Row, Button, ButtonToolbar, FormGroup} from 'react-bootstrap';
+import {Col, Row, Button} from 'react-bootstrap';
 import {Control, Form} from 'react-redux-form';
 import "./GrantApplicationCreate.css";
 import {connect} from 'react-redux';
@@ -34,7 +34,7 @@ class GrantApplicationCreate extends Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <label htmlFor="user.name" class='pull-left'>Application Type:</label>
+              <label htmlFor="grant_application.applicant_type" class='pull-left'>Application Type:</label>
               <Control.select
                 className='form-control'
                 model="grant_application.applicant_type"
@@ -47,7 +47,7 @@ class GrantApplicationCreate extends Component {
           <br/>
           <Row className='pull-right'>
             <Col xs={6}>
-              <Button bsStyle="default" type="button">Cancel</Button>
+              <Button type="button">Cancel</Button>
             </Col>
             <Col xs={6}>
               <Button bsStyle="primary" type="submit">Create</Button>

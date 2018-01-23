@@ -24,14 +24,21 @@
   padding: 0.1% 0 0.1%;
   margin: auto;
   font-family: "Roboto", sans-serif;
-  background: rgb(34, 85, 151);
+  background: rgb(76, 135, 175);
   margin: 25px auto 0px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   z-index: 1;
 }
+.grant_new:hover{
+  background: rgb(67, 115, 160);
+}
+.grant_new a:hover{
+  background: rgb(67, 115, 160);
+  text-decoration: none;
+}
 
 .grant_new h2 {
   font-size: 1.8em;
-  color: black;
+  color: white;
 }
