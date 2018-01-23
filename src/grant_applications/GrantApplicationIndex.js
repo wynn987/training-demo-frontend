@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GrantApplicationIndex } from './GrantApplicationActions';
+import { GrantApplicationIndex, GrantApplicationShow } from './GrantApplicationActions';
 import {
   Row,
   Col
@@ -11,6 +11,10 @@ import { Link } from 'react-router-dom';
 class GrantApplicationsIndex extends Component {
   componentWillMount() {
     this.props.grantApplications();
+  }
+
+  handleShowRequest(i){
+    this.props.showRequestSent(i);
   }
 
   _renderGrantApplications() {
@@ -26,7 +30,7 @@ class GrantApplicationsIndex extends Component {
       return this.props.grant_applications.map((grant_application, i) => {
         return (
           <div class='grant_row'>
-            <Link key={i} to={`/grant_applications/${grant_application.id}`}>
+            <Link key={i} to={`/grant_applications/${grant_application.id}`} onClick={() => this.handleShowRequest(grant_application.id)}>
               <Row>
                 <Col xs={12}>
                   <p style={{ color: 'black' }}><b>Applicant Name: {grant_application.applicant_name} | Application Type: {grant_application.application_type}</b></p>
@@ -62,7 +66,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    grantApplications: () => dispatch(GrantApplicationIndex())
+    grantApplications: () => dispatch(GrantApplicationIndex()),
+    showRequestSent: (id) => dispatch(GrantApplicationShow(id))
   };
 };
 

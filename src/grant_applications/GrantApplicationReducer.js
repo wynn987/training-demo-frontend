@@ -9,7 +9,7 @@ export function grantApplications(state = [], action){
 
 export function grantApplication(state = {application_type: '', applicant_name: ''}, action){
   switch (action.type) {
-    case 'GRANTS_INDEX_SUCCESS':
+    case 'GRANTS_SHOW_SUCCESS':
         return action.grant_application;
     default:
         return state;

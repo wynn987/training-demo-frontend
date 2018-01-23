@@ -1,39 +1,58 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Row,
-  Col,
-  Button
+  Col
 } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { API_URL_PREFIX } from '../utilities/helper';
+import "./GrantApplicationShow.css";
 
-class GrantApplication extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      grant_application: null
-    };
-  }
+class GrantApplicationsIndex extends Component {
 
-  _fetchGrantApplicationData(id) {
-    // Fetch grant_application data
-    let url = API_URL_PREFIX + `/grant_applications/${id}`;
-  }
-
-  componentWillMount() {
-    let id = parseInt(this.props.match.params.id, 10);
-    this._fetchGrantApplicationData(id);
+  _renderGrantApplications() {
+    if (this.props.showError || this.props.grant_application == null){
+      return (
+      <div className="Message">
+        <h3>Sorry, you are not authorised to access this page!</h3>
+        <p>Please log in as an appropriate user</p>
+      </div>
+      )
+    }
+    else{
+      return (
+        <div className='grant_div'>
+        <Row>
+          <Col xs={12}>
+            <p style={{ color: 'black' }}>Application Type: {this.props.grant_application.application_type}</p>
+            <p style={{ color: 'black' }}>Applicant Name: {this.props.grant_application.applicant_name}</p>
+            <p style={{ color: 'black' }}>Application Status: {this.props.grant_application.status}</p>
+          </Col>
+        </Row>
+        </div>
+      );
+    }
   }
 
   render() {
     return (
       <div>
         <div className='main-content'>
-        show
+          {this._renderGrantApplications()}
         </div>
       </div>
     );
   }
 }
 
-export default GrantApplication;
+const mapStateToProps = (state) => {
+  return {
+      grant_application: state.grantApplication,
+      showError: state.grantsShowError
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GrantApplicationsIndex);

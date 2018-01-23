@@ -1,4 +1,4 @@
-import {API_URL_PREFIX, getAuthHeaders, storeAuthHeaders} from '../utilities/helper'
+import {API_URL_PREFIX, getAuthHeaders} from '../utilities/helper'
 import axios from 'axios'
 
 export function grantApplications(grant_applications) {
@@ -27,7 +27,7 @@ export function GrantApplicationIndex() {
       })
       .then(function(response){
         console.log("grant application headers: " + JSON.stringify(response.headers))
-        storeAuthHeaders(response.headers)
+        //storeAuthHeaders(response.headers)
         dispatch(grantApplications(response.data))
       })
     } catch (error) {
@@ -36,18 +36,18 @@ export function GrantApplicationIndex() {
     }
   }
 }
+
 export function GrantApplicationShow(id) {
-  console.log("before send: "+ JSON.stringify(getAuthHeaders()))
+  console.log("before show: "+ JSON.stringify(getAuthHeaders()))
   return (dispatch) => {
     try {
       return axios({
         method: 'GET',
-        url: API_URL_PREFIX + "/grant_applications",
-        params: id
+        url: API_URL_PREFIX + "/grant_applications/" + id,
       })
       .then(function(response){
         console.log("grant application headers: " + JSON.stringify(response.headers))
-        storeAuthHeaders(response.headers)
+        //storeAuthHeaders(response.headers)
         dispatch(grantApplication(response.data))
       })
     } catch (error) {
