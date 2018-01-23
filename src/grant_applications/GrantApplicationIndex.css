@@ -5,10 +5,11 @@
 
 .grant_row {
   width: 720px;
+  font-family: "Roboto", sans-serif;
   padding: 1% 0 0;
   margin: auto;
   background: #FFFFFF;
-  margin: 0 auto 45px;
+  margin: 45px auto 0px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   z-index: 1;
@@ -16,4 +17,21 @@
 
 .grant_row p {
   font-size: 1.3em
+}
+
+.grant_new {
+  width: 720px;
+  padding: 0.1% 0 0.1%;
+  margin: auto;
+  font-family: "Roboto", sans-serif;
+  background: rgb(34, 85, 151);
+  margin: 25px auto 0px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  z-index: 1;
+}
+
+.grant_new h2 {
+  font-size: 1.8em;
+  color: black;
 }

@@ -17,6 +17,16 @@ class GrantApplicationsIndex extends Component {
     this.props.showRequestSent(i);
   }
 
+  _renderNewButton(){
+    return(
+      <div class='grant_new'>
+            <Link to={`/grant_applications/create`}>
+              <h2>New</h2>
+            </Link>
+          </div>
+    )
+  }
+
   _renderGrantApplications() {
     if (this.props.indexError || this.props.grant_applications == null){
       return (
@@ -27,7 +37,8 @@ class GrantApplicationsIndex extends Component {
       )
     }
     else{
-      return this.props.grant_applications.map((grant_application, i) => {
+      return (
+        this.props.grant_applications.map((grant_application, i) => {
         return (
           <div class='grant_row'>
             <Link key={i} to={`/grant_applications/${grant_application.id}`} onClick={() => this.handleShowRequest(grant_application.id)}>
@@ -42,7 +53,7 @@ class GrantApplicationsIndex extends Component {
             </Link>
           </div>
         );
-      });
+      }));
     }
   }
 
@@ -50,6 +61,7 @@ class GrantApplicationsIndex extends Component {
     return (
       <div>
         <div className='main-content'>
+        {this._renderNewButton()}
           {this._renderGrantApplications()}
         </div>
       </div>
