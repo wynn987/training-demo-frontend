@@ -2,3 +2,18 @@
   padding-top: 100px;
   text-align: center;
 }
+
+.grant_row {
+  width: 720px;
+  padding: 1% 0 0;
+  margin: auto;
+  background: #FFFFFF;
+  margin: 0 auto 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  z-index: 1;
+}
+
+.grant_row p {
+  font-size: 1.8em
+}

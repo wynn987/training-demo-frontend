@@ -9,6 +9,14 @@ export function grantsIndexError(bool) {
   return {type: 'GRANTS_INDEX_ERROR', indexError: bool};
 }
 
+export function grantsShowError(bool) {
+  return {type: 'GRANTS_SHOW_ERROR', showError: bool};
+}
+
+export function grantApplication(grant_application){
+  return {type: 'GRANT_SHOW_SUCCESS', grant_application}
+}
+
 export function GrantApplicationIndex() {
   console.log("before send: "+ JSON.stringify(getAuthHeaders()))
   return (dispatch) => {
@@ -24,6 +32,26 @@ export function GrantApplicationIndex() {
       })
     } catch (error) {
       dispatch(grantsIndexError(true))
+      throw error
+    }
+  }
+}
+export function GrantApplicationShow(id) {
+  console.log("before send: "+ JSON.stringify(getAuthHeaders()))
+  return (dispatch) => {
+    try {
+      return axios({
+        method: 'GET',
+        url: API_URL_PREFIX + "/grant_applications",
+        params: id
+      })
+      .then(function(response){
+        console.log("grant application headers: " + JSON.stringify(response.headers))
+        storeAuthHeaders(response.headers)
+        dispatch(grantApplication(response.data))
+      })
+    } catch (error) {
+      dispatch(grantsShowError(true))
       throw error
     }
   }

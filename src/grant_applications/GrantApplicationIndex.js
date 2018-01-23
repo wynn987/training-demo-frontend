@@ -5,6 +5,7 @@ import {
   Row,
   Col
 } from 'react-bootstrap';
+import "./GrantApplicationIndex.css";
 import { Link } from 'react-router-dom';
 
 class GrantApplicationsIndex extends Component {
@@ -24,16 +25,18 @@ class GrantApplicationsIndex extends Component {
     else{
       return this.props.grant_applications.map((grant_application, i) => {
         return (
-          <Link key={i} to={`/grant_applications/${grant_application.id}`}>
-            <Row>
-              <Col xs={12}>
-                <p style={{ color: 'black' }}><b>Applicant Name: {grant_application.applicant_name} | Application Type: {grant_application.application_type}</b></p>
-                <br/>
-                <br/>
-              </Col>
-            </Row>
-            <hr />
-          </Link>
+          <div class='grant_row'>
+            <Link key={i} to={`/grant_applications/${grant_application.id}`}>
+              <Row>
+                <Col xs={12}>
+                  <p style={{ color: 'black' }}><b>Applicant Name: {grant_application.applicant_name} | Application Type: {grant_application.application_type}</b></p>
+                  <br/>
+                  <br/>
+                </Col>
+              </Row>
+              <hr />
+            </Link>
+          </div>
         );
       });
     }

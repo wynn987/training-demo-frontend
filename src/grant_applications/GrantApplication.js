@@ -18,7 +18,6 @@ class GrantApplication extends Component {
   _fetchGrantApplicationData(id) {
     // Fetch grant_application data
     let url = API_URL_PREFIX + `/grant_applications/${id}`;
-    
   }
 
   componentWillMount() {
