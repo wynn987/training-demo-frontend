@@ -7,6 +7,15 @@ export function grantApplications(state = [], action){
   }
 }
 
+export function grantApplicationSelector(state = 0, action){
+  switch (action.type) {
+    case 'GRANT_APPLICATION_SELECTED':
+      return action.selectedGrant;
+    default:
+      return state;
+  }
+}
+
 export function grantsIndexError(state = false, action){
   switch (action.type) {
     case 'GRANTS_INDEX_ERROR':
@@ -51,3 +60,20 @@ export function grantsCreateError(state = false, action){
   }
 }
 
+export function grantsUpdateSuccess(state = {application_type: '', applicant_name: ''}, action){
+  switch (action.type) {
+    case 'GRANTS_UPDATE_SUCCESS':
+        return action.grant_application;
+    default:
+        return state;
+  }
+}
+
+export function grantsUpdateError(state = false, action){
+  switch (action.type) {
+    case 'GRANTS_UPDATE_ERROR':
+        return action.createError;
+    default:
+        return state;
+  }
+}

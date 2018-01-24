@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   Row,
-  Col
+  Col,
+  Button
 } from 'react-bootstrap';
 import "./GrantApplicationShow.css";
 
 class GrantApplicationsIndex extends Component {
 
+  handleCancel(){
+    this.props.history.push('/grant_applications')
+  }
+
   _renderGrantApplications() {
+    console.log(this.props)
     if (this.props.showError || this.props.grant_application == null){
       return (
       <div className="Message">
@@ -20,6 +26,8 @@ class GrantApplicationsIndex extends Component {
     else{
       return (
         <div className='grant_div'>
+        <h3>My GRANT APPLICATION</h3>
+        <hr/>
         <Row>
           <Col xs={12}>
             <p style={{ color: 'black' }}>Application Type: {this.props.grant_application.application_type}</p>
@@ -27,6 +35,12 @@ class GrantApplicationsIndex extends Component {
             <p style={{ color: 'black' }}>Application Status: {this.props.grant_application.status}</p>
           </Col>
         </Row>
+        <br/>
+          <Row className='pull-right'>
+            <Col xs={6}>
+              <Button bsStyle='primary' type="button" onClick={() => this.handleCancel()}>Back</Button>
+            </Col>
+          </Row>
         </div>
       );
     }
@@ -45,8 +59,7 @@ class GrantApplicationsIndex extends Component {
 
 const mapStateToProps = (state) => {
   return {
-      grant_application: state.grantApplication,
-      showError: state.grantsShowError
+      grant_application: state.grantApplications[state.grantApplicationSelector]
   };
 };
 
