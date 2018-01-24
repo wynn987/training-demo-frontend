@@ -81,7 +81,7 @@ export function grantsUpdateSuccess(state = {application_type: '', applicant_nam
 export function grantsUpdateError(state = false, action){
   switch (action.type) {
     case 'GRANTS_UPDATE_ERROR':
-        return action.createError;
+        return action.updateError;
     default:
         return state;
   }

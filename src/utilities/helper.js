@@ -10,12 +10,19 @@ export const API_URL_PREFIX = prefix;
 const authHeaderKeys = [
   'access-token',
   'client',
-  'expiry',
   'uid',
+  'expiry',
 ]
 export const storeAuthHeaders = (headers) => {
   authHeaderKeys.forEach((key) => {
-    axios.defaults.headers.common[key] = headers[key]
+    if (headers[key] != null && headers[key] !== undefined){
+      axios.defaults.headers.common[key] = headers[key]
+    }
+  })
+  authHeaderKeys.forEach((key) => {
+    if (headers[key] != null && headers[key] !== undefined){
+      window.localStorage.setItem(key, headers[key])
+    }
   })
 }
 

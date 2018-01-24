@@ -136,3 +136,15 @@ export function GrantApplicationUpdate(grant_application) {
     }
   }
 }
+
+export function ResetGrantApplication(){
+  return (dispatch) => {
+    dispatch(grantsUpdateSuccess(false))
+    dispatch(grantsUpdateError(false))
+    dispatch(grantsCreateComplete(false))
+    dispatch(grantsCreateError(false))
+    dispatch(grantsIndexError(false))
+    dispatch(grantsShowError(false))
+    dispatch(grantApplicationSelector(0))
+  }
+}

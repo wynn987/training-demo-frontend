@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {GrantApplicationIndex, GrantApplicationShow} from './GrantApplicationActions';
+import {GrantApplicationIndex, GrantApplicationShow, ResetGrantApplication} from './GrantApplicationActions';
 import {Row, Col, Glyphicon, Button, ButtonGroup} from 'react-bootstrap';
 import "./GrantApplicationIndex.css";
 import {Link} from 'react-router-dom';
 
 class GrantApplicationsIndex extends Component {
   componentWillMount() {
+    this.props.resetGrantApplicationStates();
     this
       .props
       .grantApplications();
@@ -94,7 +95,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     grantApplications: () => dispatch(GrantApplicationIndex()),
-    showRequestSent: (id) => dispatch(GrantApplicationShow(id))
+    showRequestSent: (id) => dispatch(GrantApplicationShow(id)),
+    resetGrantApplicationStates: () => dispatch(ResetGrantApplication())
   };
 };
 
