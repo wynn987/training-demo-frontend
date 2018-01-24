@@ -17,9 +17,6 @@ export const storeAuthHeaders = (headers) => {
   authHeaderKeys.forEach((key) => {
     axios.defaults.headers.common[key] = headers[key]
   })
-  authHeaderKeys.forEach((key) => {
-   window.localStorage.setItem(key, headers[key])
-  })
 }
 
 export var getAuthHeaders = () => {

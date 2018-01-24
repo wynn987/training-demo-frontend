@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import {Col, Row, Button} from 'react-bootstrap';
 import {Control, Form} from 'react-redux-form';
-import "./GrantApplicationCreate.css";
+import "./GrantApplicationsCreate.css";
 import {connect} from 'react-redux';
+import { GrantApplicationCreate } from "./GrantApplicationActions";
 
-class GrantApplicationCreate extends Component {
+class GrantApplicationsCreate extends Component {
   handleSubmit(grant_application) {
     this
       .props
@@ -27,7 +28,7 @@ class GrantApplicationCreate extends Component {
           <hr/>
           <Row>
             <Col xs={12}>
-              <label class='pull-left' htmlFor="grant_application.applicant_name">Applicant Name:</label>
+              <label className='pull-left' htmlFor="grant_application.applicant_name">Applicant Name:</label>
               <Control
                 type='text'
                 placeholder='Applicant Name'
@@ -37,11 +38,12 @@ class GrantApplicationCreate extends Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <label htmlFor="grant_application.applicant_type" class='pull-left'>Application Type:</label>
+              <label htmlFor="grant_application.application_type" className='pull-left'>Application Type:</label>
               <Control.select
+                defaultValue='SME'
                 className='form-control'
-                model="grant_application.applicant_type"
-                id="grant_application.applicant_type">
+                model="grant_application.application_type"
+                id="grant_application.application_type">
                 <option value="SME">SME</option>
                 <option value="MNC">MNC</option>
               </Control.select>
@@ -62,4 +64,10 @@ class GrantApplicationCreate extends Component {
   }
 }
 
-export default connect(null, null)(GrantApplicationCreate);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createGrantApplication: (grant_application) => dispatch(GrantApplicationCreate(grant_application))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(GrantApplicationsCreate);

@@ -20,7 +20,7 @@ class GrantApplicationsIndex extends Component {
 
   _renderNewButton(){
     return(
-      <div class='grant_new'>
+      <div className='grant_new'>
             <Link to={`/grant_applications/create`}>
               <h2>NEW   <Glyphicon style={{ color: 'green', fontSize: '0.7em' }} glyph="plus" /></h2>
             </Link>
@@ -41,7 +41,7 @@ class GrantApplicationsIndex extends Component {
       return (
         this.props.grant_applications.map((grant_application, i) => {
         return (
-          <div class='grant_row'>
+          <div className='grant_row'>
             <Link key={i} to={`/grant_applications/${grant_application.id}`} onClick={() => this.handleShowRequest(grant_application.id)}>
               <Row>
                 <Col xs={12}>
