@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { GrantApplicationIndex, GrantApplicationShow } from './GrantApplicationActions';
 import {
   Row,
-  Col
+  Col,
+  Glyphicon
 } from 'react-bootstrap';
 import "./GrantApplicationIndex.css";
 import { Link } from 'react-router-dom';
@@ -21,7 +22,7 @@ class GrantApplicationsIndex extends Component {
     return(
       <div class='grant_new'>
             <Link to={`/grant_applications/create`}>
-              <h2>NEW</h2>
+              <h2>NEW   <Glyphicon style={{ color: 'green', fontSize: '0.7em' }} glyph="plus" /></h2>
             </Link>
           </div>
     )

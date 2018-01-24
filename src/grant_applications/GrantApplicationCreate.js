@@ -3,7 +3,6 @@ import {Col, Row, Button} from 'react-bootstrap';
 import {Control, Form} from 'react-redux-form';
 import "./GrantApplicationCreate.css";
 import {connect} from 'react-redux';
-import {push} from 'react-router'
 
 class GrantApplicationCreate extends Component {
   handleSubmit(grant_application) {
