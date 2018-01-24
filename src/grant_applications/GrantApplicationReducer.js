@@ -60,6 +60,15 @@ export function grantsCreateError(state = false, action){
   }
 }
 
+export function grantsCreateComplete(state = false, action){
+  switch (action.type) {
+    case 'GRANTS_CREATE_COMPLETE':
+        return action.createComplete;
+    default:
+        return state;
+  }
+}
+
 export function grantsUpdateSuccess(state = {application_type: '', applicant_name: ''}, action){
   switch (action.type) {
     case 'GRANTS_UPDATE_SUCCESS':

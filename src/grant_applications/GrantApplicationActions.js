@@ -37,6 +37,10 @@ export function grantApplicationSelector(int){
   return {type: "GRANT_APPLICATION_SELECTED", selectedGrant: int}
 }
 
+export function grantsCreateComplete(bool){
+  return {type: 'GRANTS_CREATE_COMPLETE', createComplete: bool}
+}
+
 export function GrantApplicationIndex() {
   storeAuthHeaders(getAuthHeaders())
   console.log("before show: "+ JSON.stringify(axios.defaults.headers))
@@ -101,6 +105,9 @@ export function GrantApplicationCreate(grant_application) {
     } catch (error) {
       dispatch(grantsCreateError(true))
       throw error
+    }
+    finally{
+      dispatch(grantsCreateComplete(true))
     }
   }
 }

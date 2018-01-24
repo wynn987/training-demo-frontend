@@ -3,7 +3,8 @@ import {user} from '../auth/SignIn/SignInReducer';
 import {createForms} from 'react-redux-form';
 import { grantApplications, grantsIndexError, grantApplication,
          grantsShowError, grantsCreateError, grantsCreateSuccess,
-         grantsUpdateError, grantsUpdateSuccess, grantApplicationSelector} 
+         grantsUpdateError, grantsUpdateSuccess, grantApplicationSelector,
+         grantsCreateComplete} 
        from '../grant_applications/GrantApplicationReducer';
 import { reduxTokenAuthReducer } from 'redux-token-auth'
 
@@ -18,6 +19,7 @@ export default combineReducers({
     grantsIndexError,
     grantApplication,
     grantsShowError,
+    grantsCreateComplete,
     grantsCreateSuccess,
     grantsCreateError,
     grantsUpdateSuccess,

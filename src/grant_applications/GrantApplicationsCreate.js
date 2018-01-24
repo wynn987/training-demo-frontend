@@ -16,6 +16,12 @@ class GrantApplicationsCreate extends Component {
     this.props.history.push('/grant_applications')
   }
 
+  componentDidUpdate(){
+    if (this.props.createComplete){
+      this.props.history.push('/grant_applications')
+    }
+  }
+
   render() {
     return (
       <div className='create-page'>
@@ -64,10 +70,14 @@ class GrantApplicationsCreate extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {createComplete: state.grantsCreateComplete};
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     createGrantApplication: (grant_application) => dispatch(GrantApplicationCreate(grant_application))
   };
 };
 
-export default connect(null, mapDispatchToProps)(GrantApplicationsCreate);
+export default connect(mapStateToProps, mapDispatchToProps)(GrantApplicationsCreate);
