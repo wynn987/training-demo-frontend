@@ -64,10 +64,16 @@ class GrantApplicationsUpdate extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+      grant_application: state.grantApplications[state.grantApplicationSelector]
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     updateGrantApplication: (grant_application) => dispatch(GrantApplicationUpdate(grant_application))
   };
 };
 
-export default connect(null, mapDispatchToProps)(GrantApplicationsUpdate);
+export default connect(mapStateToProps, mapDispatchToProps)(GrantApplicationsUpdate);
