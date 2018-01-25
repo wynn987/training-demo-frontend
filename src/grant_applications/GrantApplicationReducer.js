@@ -104,3 +104,12 @@ export function grantsUpdateError(state = false, action){
         return state;
   }
 }
+
+export function grantsUpdateComplete(state = false, action){
+  switch (action.type) {
+    case 'GRANTS_UPDATE_COMPLETE':
+        return action.updateComplete;
+    default:
+        return state;
+  }
+}

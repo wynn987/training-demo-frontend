@@ -42,6 +42,10 @@ export function grantsUpdateSuccess(bool){
   return {type: 'GRANT_UPDATE_SUCCESS', updateSuccess: bool}
 }
 
+export function grantsUpdateComplete(bool){
+  return {type: 'GRANTS_UPDATE_COMPLETE', updateComplete: bool}
+}
+
 export function grantApplicationSelector(int){
   return {type: "GRANT_APPLICATION_SELECTED", selectedGrant: int}
 }
@@ -142,14 +146,15 @@ export function GrantApplicationCreate(grant_application) {
   }
 }
 
-export function GrantApplicationUpdate(grant_application) {
+export function GrantApplicationUpdate(id, grant_application) {
   console.log("before update: "+ JSON.stringify(getAuthHeaders()))
+  console.log(grant_application)
   return (dispatch) => {
     try {
       return axios({
         method: 'PATCH',
-        url: API_URL_PREFIX + "/grant_applications",
-        data: grant_application
+        url: API_URL_PREFIX + "/grant_applications/" + id,
+        data: {grant_application}
       })
       .then(function(response){
         if (response.status === 200)
@@ -164,6 +169,9 @@ export function GrantApplicationUpdate(grant_application) {
       dispatch(grantsUpdateError(true))
       throw error
     }
+    finally{
+      dispatch(grantsUpdateComplete(true))
+    }
   }
 }
 
@@ -171,6 +179,7 @@ export function ResetGrantApplication(){
   return (dispatch) => {
     dispatch(grantsUpdateSuccess(false))
     dispatch(grantsUpdateError(false))
+    dispatch(grantsUpdateComplete(false))
     dispatch(grantsCreateComplete(false))
     dispatch(grantsCreateError(false))
     dispatch(grantsIndexError(false))

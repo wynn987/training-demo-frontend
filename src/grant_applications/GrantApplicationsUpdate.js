@@ -6,14 +6,30 @@ import {connect} from 'react-redux';
 import { GrantApplicationUpdate } from "./GrantApplicationActions";
 
 class GrantApplicationsUpdate extends Component {
-  handleSubmit(grant_application) {
+  handleSubmit(id, grant_application) {
     this
       .props
-      .updateGrantApplication(grant_application)
+      .updateGrantApplication(id, grant_application)
+  }
+  matchId(grant_application){
+    return grant_application.id === this.props.selectedId
+  }
+  componentWillMount(){
+    const selectedApplication = this.props.grantApplications.find(this.matchId, this)
+    console.log(JSON.stringify(selectedApplication))
+    this.props.grant_application.application_type = selectedApplication.application_type
+    this.props.grant_application.applicant_name = selectedApplication.applicant_name
+    console.log(JSON.stringify(this.props.grant_application))
   }
 
   handleCancel(){
     this.props.history.push('/grant_applications')
+  }
+
+  componentDidUpdate(){
+    if (this.props.updateComplete){
+      this.props.history.push('/grant_applications')
+    }
   }
 
   render() {
@@ -22,7 +38,7 @@ class GrantApplicationsUpdate extends Component {
         <Form
           className='form'
           model="grant_application"
-          onSubmit={(grant_application) => this.handleSubmit(grant_application)}>
+          onSubmit={(grant_application) => this.handleSubmit(this.props.selectedId, grant_application)}>
 
           <h3>Grant Application</h3>
           <hr/>
@@ -40,7 +56,6 @@ class GrantApplicationsUpdate extends Component {
             <Col xs={12}>
               <label htmlFor="grant_application.application_type" className='pull-left'>Application Type:</label>
               <Control.select
-                defaultValue='SME'
                 className='form-control'
                 model="grant_application.application_type"
                 id="grant_application.application_type">
@@ -66,13 +81,16 @@ class GrantApplicationsUpdate extends Component {
 
 const mapStateToProps = (state) => {
   return {
-      grant_application: state.grantApplications[state.grantApplicationSelector]
+    selectedId: state.grantApplicationSelector,
+    grantApplications: state.grantApplications,
+    grant_application: state.grant_application,
+    updateComplete: state.grantsUpdateComplete
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateGrantApplication: (grant_application) => dispatch(GrantApplicationUpdate(grant_application))
+    updateGrantApplication: (id, grant_application) => dispatch(GrantApplicationUpdate(id, grant_application))
   };
 };
 
