@@ -4,7 +4,7 @@ import {createForms} from 'react-redux-form';
 import { grantApplications, grantsIndexError, grantApplication,
          grantsShowError, grantsCreateError, grantsCreateSuccess,
          grantsUpdateError, grantsUpdateSuccess, grantApplicationSelector,
-         grantsCreateComplete} 
+         grantsCreateComplete, grantsDeleteComplete, grantsDeleteError} 
        from '../grant_applications/GrantApplicationReducer';
 import { reduxTokenAuthReducer } from 'redux-token-auth'
 
@@ -25,6 +25,8 @@ export default combineReducers({
     grantsUpdateSuccess,
     grantsUpdateError,
     grantApplicationSelector,
+    grantsDeleteComplete,
+    grantsDeleteError,
     ...createForms({
         user: user,
         grant_application: initialGrantApplicationState

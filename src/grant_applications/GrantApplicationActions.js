@@ -20,9 +20,18 @@ export function grantApplication(grant_application){
 export function grantsCreateError(bool) {
   return {type: 'GRANTS_CREATE_ERROR', createError: bool};
 }
+export function grantsCreateComplete(bool){
+  return {type: 'GRANTS_CREATE_COMPLETE', createComplete: bool}
+}
 
 export function grantsCreateSuccess(bool){
   return {type: 'GRANT_CREATE_SUCCESS', createSuccess: bool}
+}
+export function grantsDeleteError(bool) {
+  return {type: 'GRANTS_DELETE_ERROR', deleteError: bool};
+}
+export function grantsDeleteComplete(bool){
+  return {type: 'GRANTS_DELETE_COMPLETE', deleteComplete: bool}
 }
 
 export function grantsUpdateError(bool) {
@@ -37,9 +46,6 @@ export function grantApplicationSelector(int){
   return {type: "GRANT_APPLICATION_SELECTED", selectedGrant: int}
 }
 
-export function grantsCreateComplete(bool){
-  return {type: 'GRANTS_CREATE_COMPLETE', createComplete: bool}
-}
 
 export function GrantApplicationIndex() {
   storeAuthHeaders(getAuthHeaders())
@@ -81,6 +87,30 @@ export function GrantApplicationShow(id) {
     //   dispatch(grantsShowError(true))
     //   throw error
     // }
+  }
+}
+
+export function GrantApplicationDelete(id) {
+  console.log("before show: "+ JSON.stringify(axios.defaults.headers))
+  return (dispatch) => {
+    try {
+      return axios({
+        method: 'DELETE',
+        url: API_URL_PREFIX + "/grant_applications/" + id,
+      })
+      .then(function(response){
+        if (response.status !== 204)
+        {
+          dispatch(grantsDeleteError(true))
+        }
+      })
+    } catch (error) {
+      dispatch(grantsDeleteError(true))
+      throw error
+    }
+    finally{
+      dispatch(grantsDeleteComplete(true))
+    }
   }
 }
 
@@ -145,6 +175,8 @@ export function ResetGrantApplication(){
     dispatch(grantsCreateError(false))
     dispatch(grantsIndexError(false))
     dispatch(grantsShowError(false))
+    dispatch(grantsDeleteComplete(false))
+    dispatch(grantsDeleteError(false))
     dispatch(grantApplicationSelector(0))
   }
 }

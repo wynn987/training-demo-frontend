@@ -1,0 +1,18 @@
+.Message {
+  padding-top: 100px;
+  text-align: center;
+}
+
+.grant_div {
+  width: 980px;
+  padding: 8% 0 0;
+  margin: auto;
+  background: #FFFFFF;
+  margin: 0 auto 45px;
+  text-align: center;
+  z-index: 1;
+  padding: 45px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  font-size: 1.3em;
+  font-family: "Roboto", sans-serif;
+}

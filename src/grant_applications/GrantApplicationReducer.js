@@ -69,6 +69,24 @@ export function grantsCreateComplete(state = false, action){
   }
 }
 
+export function grantsDeleteError(state = false, action){
+  switch (action.type) {
+    case 'GRANTS_DELETE_ERROR':
+        return action.deleteError;
+    default:
+        return state;
+  }
+}
+
+export function grantsDeleteComplete(state = false, action){
+  switch (action.type) {
+    case 'GRANTS_DELETE_COMPLETE':
+        return action.deleteComplete;
+    default:
+        return state;
+  }
+}
+
 export function grantsUpdateSuccess(state = {application_type: '', applicant_name: ''}, action){
   switch (action.type) {
     case 'GRANTS_UPDATE_SUCCESS':

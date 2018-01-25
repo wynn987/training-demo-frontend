@@ -19,6 +19,13 @@ class GrantApplicationsIndex extends Component {
       .showRequestSent(i);
   }
 
+  handleDelete(id){
+    this
+      .props
+      .showRequestSent(id);
+      this.props.history.push('/grant_applications/delete')
+  }
+
   _renderNewButton() {
     return (
       <div className='grant_new'>
@@ -64,7 +71,7 @@ class GrantApplicationsIndex extends Component {
             <Row className='pull-right'>
               <Col xs={12}>
               <ButtonGroup>
-                <Button bsStyle="danger" type="button" >Delete</Button>
+                <Button bsStyle="danger" onClick={() => this.handleDelete(grant_application.id)} type="button" >Delete</Button>
                 <Button bsStyle="primary" type="button">Edit</Button>
                 </ButtonGroup>
               </Col>
